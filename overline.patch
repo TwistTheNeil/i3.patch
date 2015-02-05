@@ -1,7 +1,7 @@
 From 6a577c764c660e26155c4e7358f5e196640361cf Mon Sep 17 00:00:00 2001
 From: Neil Castelino <neil.castelino@siemens.com>
 Date: Thu, 5 Feb 2015 14:23:01 +0100
-Subject: [PATCH] Workspace count with overline
+Subject: [PATCH 1/2] Workspace count with overline
 
 ---
  i3bar/src/xcb.c | 4 ++--
@@ -26,6 +26,47 @@ index 2d33919..f84bfd5 100644
                                          ws_walk->name_width + logical_px(8),
 -                                        font.height + logical_px(2)};
 +                                        0 + logical_px(2)};
+                 xcb_poly_fill_rectangle(xcb_connection,
+                                         outputs_walk->buffer,
+                                         outputs_walk->bargc,
+-- 
+1.9.1
+
+
+From b07fde16b9926edc2d2c086e7ed3dcb780f4144d Mon Sep 17 00:00:00 2001
+From: Neil Castelino <neil.castelino@siemens.com>
+Date: Thu, 5 Feb 2015 16:27:16 +0100
+Subject: [PATCH 2/2] Better overline
+
+---
+ i3bar/src/xcb.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/i3bar/src/xcb.c b/i3bar/src/xcb.c
+index f84bfd5..0eca3e3 100644
+--- a/i3bar/src/xcb.c
++++ b/i3bar/src/xcb.c
+@@ -1769,9 +1769,9 @@ void draw_bars(bool unhide) {
+                               mask,
+                               vals_border);
+                 xcb_rectangle_t rect_border = {i,
+-                                               logical_px(1),
++                                               0,
+                                                ws_walk->name_width + logical_px(10),
+-                                               0 + logical_px(2)};
++                                               1 + logical_px(1)};
+                 xcb_poly_fill_rectangle(xcb_connection,
+                                         outputs_walk->buffer,
+                                         outputs_walk->bargc,
+@@ -1783,9 +1783,9 @@ void draw_bars(bool unhide) {
+                               mask,
+                               vals);
+                 xcb_rectangle_t rect = {i + logical_px(1),
+-                                        2 * logical_px(1),
++                                        0 * logical_px(1),
+                                         ws_walk->name_width + logical_px(8),
+-                                        0 + logical_px(2)};
++                                        0 + logical_px(1)};
                  xcb_poly_fill_rectangle(xcb_connection,
                                          outputs_walk->buffer,
                                          outputs_walk->bargc,
